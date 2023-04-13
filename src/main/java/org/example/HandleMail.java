@@ -12,32 +12,19 @@ public class HandleMail {
         Properties props = System.getProperties();
 
         System.out.println(props);
-
-        //set properties :
-
         props.put("mail.smtp.host",host);
         props.put("mail.smtp.port","465");
         props.put("mail.smtp.ssl.enable","true");
         props.put("mail.smtp.auth","true");
-
-
-        //session
         Session mailSession = Session.getInstance(props,new MailAuthenticator());
-
-        //create the message object
 
         MimeMessage mimeMessage = new MimeMessage(mailSession);
 
 
         try {
-
-            //sender
             mimeMessage.setFrom(MailConstants.SENDER);
-
-            //receiver
             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(MailConstants.RECEIVERMAILADDRESS));
 
-            //subject
             mimeMessage.setSubject(MailConstants.SUBJECT);
 
             mimeMessage.setText(MailConstants.MESSAGE);
